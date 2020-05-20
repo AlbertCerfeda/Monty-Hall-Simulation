@@ -47,7 +47,7 @@
     <!-- SPIEGAZIONE CLASSI
         .unlocked Indica che la porta può essere cliccata. Se questa classe non è presente, il click handler non si attiva
         .pending Indica che la porta è stata scelta all'inizio. La porta apparirà come socchiusa e verrà mostrato il messaggio se si è sicuri della scelta
-        .open Indica la scelta finale. Fa partire l'animazione della porta che si apre.
+        .open Fa partire l'animazione della porta che si apre.
     -->
     <script>
         function openRandomDoor() {
