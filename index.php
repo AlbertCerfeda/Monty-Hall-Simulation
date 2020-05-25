@@ -22,26 +22,34 @@
 <body>
     <button id="reset" type="button" class="btn btn-warning">RESET</button>
 
+	    <div id="doorContainer">
 
-    <div id="doorContainer">
-        <div id="leftDoor" class="door unlocked">
-            <img src="./media/door/0.png" hidden>
-        </div>
+	    	<div id="left" class="behindDoor">
 
-        <div id="centralDoor" class="door unlocked">
-            <img src="./media/door/0.png" hidden>
-        </div>
+	    		<div id="leftDoor" class="door unlocked">
+	            	<img src="./media/door/0.png" hidden>
+	       		</div>
 
-        <div id="rightDoor" class="door unlocked">
-            <img src="./media/door/0.png" hidden>
-        </div>
+	    	</div>
+	        
+	    	<div id="central" class="behindDoor">
+		        <div id="centralDoor" class="door unlocked">
+		            <img src="./media/door/0.png" hidden>
+		        </div>
+		    </div>
 
-        <div id="pendingDialog" style="vertical-align: middle;">
-            <p  style="color: red">
-                <b>Are you sure you want to open this door?</b>
-            </p>
-        </div>
-    </div>
+		    <div id="right" class="behindDoor">
+		        <div id="rightDoor" class="door unlocked">
+		            <img src="./media/door/0.png" hidden>
+		        </div>
+		   	</div>
+
+	        <div id="pendingDialog" style="vertical-align: middle;">
+	            <p  style="color: red">
+	                <b>Are you sure you want to open this door?</b>
+	            </p>
+	        </div>
+	    </div>
 
 
     <!-- SPIEGAZIONE CLASSI
@@ -52,7 +60,7 @@
     <script>
         function openRandomDoor() {
             console.log("Opening random door...");
-            console.log($(".door").not(".pending"));
+            console.log($(".door"));
             ///
             //TODO: far apparire capra
             ///
@@ -60,7 +68,8 @@
             console.log(random);
             var $closedDoors =$(".door").not(".pending");
             $($closedDoors[random]).addClass('open').removeClass('unlocked').off();
-
+            $($closedDoors[random]).parent().css('background-image', 'url("./media/c.png")');
+            $($closedDoors[random]).css('visibility', 'hidden');
         }
         function setup(){
             $('#pendingDialog').hide();
@@ -68,6 +77,7 @@
             $doors=$(".door").removeClass();
             $doors.addClass('door');
             $doors.addClass('unlocked');
+            
             $(".door").off();//Rimuove tutti gli handlers
 
             $(".door.unlocked").click(function(){
@@ -88,12 +98,23 @@
                     $('#pendingDialog').hide();
 
                     $(this).addClass('open');
-                    ////
-                    //TODO: Fare Math.random() per scegliere se far uscire la capra o la macchina
-                    ////
+                    var random = Math.round(Math.random());
+                    switch(random){
+                    	case 0: 
+                    		$(this).parent().css('background-image', 'url("./media/c.png")');
+                    		$(this).css('visibility', 'hidden');
+                    	break;
+
+                    	case 1:
+                    		$(this).parent().css('background-image', 'url("./media/m.png")');
+                    		$(this).css('visibility', 'hidden');
+                    	break;
+                    }
                 }
             });
         }
+
+
 
         setup();
 
