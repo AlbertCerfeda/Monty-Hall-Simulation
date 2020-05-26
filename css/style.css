@@ -16,17 +16,26 @@ body{
 
     display: inline-block;
 }
+
+.align{
+    display: inline-block;
+}
+
 .door.unlocked:hover{
     background: url(../media/door/1.png);
 }
+
 .door.pending{
     background: url(../media/door/1.png);
 }
+
 .door.open{
     animation-name: socchiuso-aperto;
     animation-duration: 250ms;
     animation-fill-mode: forwards;
 }
+
+
 #doorContainer{
     position: absolute;
 }
