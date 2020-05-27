@@ -52,6 +52,7 @@
             <br>
 
             <button id="reset" style="float: right;" type="button" class="btn btn-warning">RESET PLAY</button>
+            <button id="resetData" style="float: right;" type="button" class="btn btn-warning">RESET DATA</button>
 
             <div class="input-group">
                 <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
@@ -185,15 +186,17 @@
                 Keep++;
                 Win_Keep++;
                 Cars_Keep++;
-                var percentual = (Win_Keep/Keep)*100+"%";
+                var percentual = (Win_Keep/Keep)*100;
 
                 if(Keep == Win_Keep){
-                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"</strong>");
+                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Keep_Lose').html("Goats: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"</strong>");
-                    $('#Keep_Win').css("width",percentual);  
+                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"%"+"</strong>");
+                    $('#Keep_Win').css("width",percentual+"%");
+                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
+                    $('#Keep_Lose').css("width",(100-percentual)+"%");    
                 }
             }
             else if(KeepChoice && Win == false){
@@ -201,15 +204,18 @@
                 Keep++;
                 Lose_Keep++;
                 Goats_Keep++;
-                var percentual = (Lose_Keep/Keep)*100+"%";
+                var percentual = (Lose_Keep/Keep)*100;
+
 
                 if(Keep == Lose_Keep){
-                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"</strong>");
+                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Keep_Win').html("Cars: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"</strong>");
-                    $('#Keep_Lose').css("width",percentual);   
+                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"%"+"</strong>");
+                    $('#Keep_Lose').css("width",percentual+"%");   
+                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
+                    $('#Keep_Win').css("width",(100-percentual)+"%");  
                 }
             }
             else if(ChangeChoice && Win){
@@ -220,15 +226,17 @@
 
                 console.log(Change,Change_Win,Cars_Change);
 
-                var percentual = (Win_Change/Change)*100+"%";
+                var percentual = (Win_Change/Change)*100;
 
                 if(Change == Win_Change){
-                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"</strong>");
+                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Lose').html("Goats: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"</strong>");
-                    $('#Change_Win').css("width",percentual);  
+                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"%"+"</strong>");
+                    $('#Change_Win').css("width",percentual+"%");
+                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
+                    $('#Change_Lose').css("width",(100-percentual)+"%");    
                 }
             }
             else if(ChangeChoice && Win == false){
@@ -236,15 +244,17 @@
                 Change++;
                 Lose_Change++;
                 Goats_Change++;
-                var percentual = (Lose_Change/Change)*100+"%";
+                var percentual = (Lose_Change/Change)*100;
 
                 if(Change == Lose_Change){
-                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"</strong>");
+                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Win').html("Cars: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"</strong>");
-                    $('#Change_Lose').css("width",percentual);
+                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"%"+"</strong>");
+                    $('#Change_Lose').css("width",percentual+"%");
+                    $('#Change_Win').html("Goats: "+Cars_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
+                    $('#Change_Win').css("width",(100-percentual)+"%"); 
                 }
             }
 
@@ -279,6 +289,32 @@
 
         $('#reset').click(function(){
             setup();
+        });
+
+        $('#resetData').click(function(){
+            Win = true;
+            Keep = 0;
+            Change = 0;
+            Win_Keep = 0;
+            Lose_Keep = 0;
+            Win_Change = 0;
+            Lose_Change = 0;
+            Cars_Keep = 0;
+            Goats_Keep = 0;
+            Cars_Change = 0;
+            Goats_Change = 0;
+
+            $('#Keep_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
+            $('#Keep_Win').css("width","50%");
+            $('#Keep_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
+            $('#Keep_Lose').css("width","50%");   
+
+
+            $('#Change_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
+            $('#Change_Win').css("width","50%");
+            $('#Change_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
+            $('#Change_Lose').css("width","50%");  
+
         });
 
         $('#goAutoplay').click(function(){
