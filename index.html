@@ -24,7 +24,7 @@
 
 	    <div id="doorContainer">
 
-	    	<div class="behindDoor align">
+	    	<div class="behindDoor">
 
 	    		<div id="leftDoor" class="door unlocked">
 	            	<img src="./media/door/0.png" hidden>
@@ -32,13 +32,13 @@
 
 	    	</div>
 	        
-	    	<div class="behindDoor align">
+	    	<div class="behindDoor">
 		        <div id="centralDoor" class="door unlocked">
 		            <img src="./media/door/0.png" hidden>
 		        </div>
 		    </div>
 
-		    <div class="behindDoor align">
+		    <div class="behindDoor">
 		        <div id="rightDoor" class="door unlocked">
 		            <img src="./media/door/0.png" hidden>
 		        </div>
@@ -51,17 +51,25 @@
 	        </div>
             <br>
 
-            <button id="reset" style="float: right;" type="button" class="btn btn-warning">RESET</button>
+            <button id="reset" style="float: right;" type="button" class="btn btn-warning">RESET PLAY</button>
+
+            <div class="input-group">
+                <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="goAutoplay" type="button">GO</button>
+                </div>
+            </div>
 
             <button id="KeepChoice" style="float: left;" type="button" class="btn btn-success btn-lg">Keep Choice</button>
             <div style="margin-top: 50px;"></div>
 
             <div class="mt-2 mt-md-0 d-flex">
-                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Keep_Win">Cars: 0 50%</div>
-                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Keep_Lose">Goats: 0 50%</div>
+                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Keep_Win">Cars: 0 | <strong>50%</strong></div>
+                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Keep_Lose">Goats: 0 | <strong>50%</strong></div>
             </div>
 
             <div style="margin-top: 50px;"></div>
+
 
 
             <button id="ChangeChoice" style="float: left;" type="button" class="btn btn-danger btn-lg">Change Choice</button>
@@ -69,8 +77,8 @@
             <div style="margin-top: 30px;"></div>
 
             <div class="mt-2 mt-md-0 d-flex">
-                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Change_Win">Cars: 0 50%</div>
-                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Change_Lose">Goats: 0 50%</div>
+                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Change_Win">Cars: 0 | <strong>50%</strong></div>
+                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Change_Lose">Goats: 0 | <strong>50%</strong></div>
             </div>
             
 	    </div>
@@ -102,20 +110,22 @@
             console.log("Opening random door...");
             console.log($(".door"));
             var random = Math.round(Math.random());
-            console.log(random);
+            console.log("Revealing door ",random);
             var $closedDoors =$(".door").not(".pending");
             $($closedDoors[random]).addClass('open').removeClass('unlocked').off();
             $($closedDoors[random]).parent().css('background-image', 'url("./media/c.png")');
-            $($closedDoors[random]).css('visibility', 'hidden');            
         }
 
-        function setup(){
+
+        function setup(){//Questa funzione viene richiamata per ripristinare ai valori di default tutte le variabili
             $('#pendingDialog').hide();
 
             $doors=$(".door").removeClass();
             $doors.addClass('door');
             $doors.addClass('unlocked');
-            
+
+            $('.behindDoor').css('background-image', 'none');
+
             $(".door").off();//Rimuove tutti gli handlers
 
             $(".door.unlocked").click(function(){
@@ -149,22 +159,22 @@
 
                     console.log(KeepChoice);
 
-                    var random = Math.round(Math.random());
-                    switch(random){
+
+                    switch(Math.round(Math.random())){
                     	case 0: 
                     		$(this).parent().css('background-image', 'url("./media/c.png")');
-                    		$(this).css('visibility', 'hidden');
                             Win = false;
                             ChangeGraphic();
                     	break;
 
                     	case 1:
                     		$(this).parent().css('background-image', 'url("./media/m.png")');
-                    		$(this).css('visibility', 'hidden');
                             Win = true;
                             ChangeGraphic();
                     	break;
                     }
+
+
                 }
             });
         }
@@ -178,11 +188,11 @@
                 var percentual = (Win_Keep/Keep)*100+"%";
 
                 if(Keep == Win_Keep){
-                    $('#Keep_Win').text("Cars: "+Cars_Keep +"  "+percentual);
-                    $('#Keep_Lose').text("Goats: 0" +"  "+"0%");       
+                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"</strong>");
+                    $('#Keep_Lose').html("Goats: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Keep_Win').text("Cars: "+Cars_Keep +"  "+percentual);
+                    $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"</strong>");
                     $('#Keep_Win').css("width",percentual);  
                 }
             }
@@ -194,11 +204,11 @@
                 var percentual = (Lose_Keep/Keep)*100+"%";
 
                 if(Keep == Lose_Keep){
-                    $('#Keep_Lose').text("Goats: "+Goats_Keep +"  "+percentual);
-                    $('#Keep_Win').text("Cars: 0" +"  "+"0%");       
+                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"</strong>");
+                    $('#Keep_Win').html("Cars: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Keep_Lose').text("Goats: "+Goats_Keep +"  "+percentual);
+                    $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"</strong>");
                     $('#Keep_Lose').css("width",percentual);   
                 }
             }
@@ -213,11 +223,11 @@
                 var percentual = (Win_Change/Change)*100+"%";
 
                 if(Change == Win_Change){
-                    $('#Change_Win').text("Cars: "+Cars_Change +"  "+percentual);
-                    $('#Change_Lose').text("Goats: 0" +"  "+"0%");       
+                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"</strong>");
+                    $('#Change_Lose').html("Goats: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Change_Win').text("Cars: "+Cars_Change +"  "+percentual);
+                    $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"</strong>");
                     $('#Change_Win').css("width",percentual);  
                 }
             }
@@ -229,22 +239,51 @@
                 var percentual = (Lose_Change/Change)*100+"%";
 
                 if(Change == Lose_Change){
-                    $('#Change_Lose').text("Goats: "+Goats_Change +"  "+percentual);
-                    $('#Change_Win').text("Cars: 0" +"  "+"0%");       
+                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"</strong>");
+                    $('#Change_Win').html("Cars: 0" +" | <strong>"+"0%"+"</strong>");
                 }
                 else{
-                    $('#Change_Lose').text("Goats: "+Goats_Change +"  "+percentual);
-                    $('#Change_Lose').css("width",percentual);   
+                    $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"</strong>");
+                    $('#Change_Lose').css("width",percentual);
                 }
             }
 
 
         }
+        function autoplay($n){ //Recursive function that simulates the user clicking on the doors (aka playing the game) for a give $n times
+            if ($n > 0){
+                $('#reset').trigger('click');                   //Resets all the doors to default
 
+
+                //////
+                //First click simulation
+                $random = Math.round((Math.random() * 2));      //Random between 0 and 2 (3 doors)
+                var $clickableDoors =$(".door.unlocked");       //All clickable doors
+                $($clickableDoors[$random]).trigger('click');   //Triggers a click event on the randomly chosen door
+                //////////
+                //Second Click simulation
+                $random = Math.round((Math.random()));          //Random between 0 an 1 (remaining 2 doors)
+                var $clickableDoors =$(".door.unlocked");       //All clickable doors
+                $($clickableDoors[$random]).trigger('click');   //Triggers a click event on the randomly chosen door
+                ///////
+
+                $('#autoplayInput').attr('value',$n);           //Just for aesthetics. Sets the input number of the autoplay to the remaining plays to execute
+                $n--;
+                if ($n >0){ //If there are more plays to simulate, it calls another time autoplay()
+                    setTimeout(autoplay($n),1); //Executes autoplay() after 1 millisecond. In order to avoid lag
+                }
+
+            }
+        }
         setup();
 
         $('#reset').click(function(){
             setup();
+        });
+
+        $('#goAutoplay').click(function(){
+            $('#reset').trigger('click');
+            autoplay($('#autoplayInput').val());
         });
 
         $("document").ready(function(){
