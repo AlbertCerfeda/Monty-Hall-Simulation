@@ -1,6 +1,7 @@
 body{
     width: 100%;
     height: 100%;
+    background-color: LightGrey !important;
 }
 @keyframes socchiuso-aperto {
     0% { background: url(../media/door/1.png); }
@@ -37,5 +38,15 @@ body{
 
 
 #doorContainer{
-    position: absolute;
+    margin-top: 10%;
+    margin-left: 20%;
+    width: 50%;
+    border: 5px solid brown;
+    padding: 10px;
+}
+
+#doorCont{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
