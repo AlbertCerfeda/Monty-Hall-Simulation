@@ -20,19 +20,17 @@
 
 </head>
 <body>
-    
+
 
 	    <div id="doorContainer">
 
-            <div id="doorCont">   
+            <div id="doorCont">
     	    	<div class="behindDoor">
-
     	    		<div id="leftDoor" class="door unlocked">
     	            	<img src="./media/door/0.png" hidden>
     	       		</div>
-
     	    	</div>
-    	        
+
     	    	<div class="behindDoor">
     		        <div id="centralDoor" class="door unlocked">
     		            <img src="./media/door/0.png" hidden>
@@ -51,47 +49,41 @@
     	            </p>
     	        </div>
                 <br>
-
                 <button id="reset" type="button" class="btn btn-warning" style="margin: 0 auto; width: 100%">RESET PLAY</button>
-
             </div>
 
 
-
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Autoplay</span>
+            <div style="margin-top: 3%;width: 50%">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Autoplay</span>
+                    </div>
+                    <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="goAutoplay" type="button">GO</button>
+                    </div>
                 </div>
-                <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" id="goAutoplay" type="button">GO</button>
+            </div>
+            <div style="margin-top: 3%">
+                <button id="resetData" type="button" class="btn btn-danger" style="width: 100%">RESET DATA</button>
+                <div style="margin-top: 1%">
+                    <span style="font-size: 20px"><strong>Keep Choice</strong></span>
+
+                    <div class="mt-2 mt-md-0 d-flex">
+                        <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Keep_Win">Cars: 0 | <strong>50%</strong></div>
+                        <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Keep_Lose">Goats: 0 | <strong>50%</strong></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1%">
+                    <span style="font-size: 20px"><strong>Change Choice</strong></span>
+
+                    <div class="mt-2 mt-md-0 d-flex">
+                        <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Change_Win">Cars: 0 | <strong>50%</strong></div>
+                        <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Change_Lose">Goats: 0 | <strong>50%</strong></div>
+                    </div>
                 </div>
             </div>
-
-
-            <button id="resetData" type="button" class="btn btn-danger" style="width: 100%">RESET DATA</button>
-
-            <button id="KeepChoice" style="float: left;" type="button" class="btn btn-success btn-lg">Keep Choice</button>
-            <div style="margin-top: 50px;"></div>
-
-            <div class="mt-2 mt-md-0 d-flex">
-                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Keep_Win">Cars: 0 | <strong>50%</strong></div>
-                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Keep_Lose">Goats: 0 | <strong>50%</strong></div>
-            </div>
-
-            <div style="margin-top: 50px;"></div>
-
-
-
-            <button id="ChangeChoice" style="float: left;" type="button" class="btn btn-danger btn-lg">Change Choice</button>
-            <br>
-            <div style="margin-top: 30px;"></div>
-
-            <div class="mt-2 mt-md-0 d-flex">
-                <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Change_Win">Cars: 0 | <strong>50%</strong></div>
-                <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Change_Lose">Goats: 0 | <strong>50%</strong></div>
-            </div>
-            
 	    </div>
 
 
@@ -172,7 +164,7 @@
                     if($(this).attr('id') != pendingDoor){
                         KeepChoice = false;
                     }
-                    else{ //added else so that variable is not based on reset 
+                    else{ //added else so that variable is not based on reset
                         KeepChoice = true;
                     }
 
@@ -180,7 +172,7 @@
 
 
                     switch(Math.round(Math.random())){
-                    	case 0: 
+                    	case 0:
                     		$(this).parent().css('background-image', 'url("./media/c.png")');
                             Win = false;
                             ChangeGraphic();
@@ -199,8 +191,8 @@
         }
 
         function ChangeGraphic(){
-            if(KeepChoice && Win){
 
+            if(KeepChoice && Win){
                 Keep++;
                 Win_Keep++;
                 Cars_Keep++;
@@ -214,7 +206,7 @@
                     $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Keep_Win').css("width",percentual+"%");
                     $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Keep_Lose').css("width",(100-percentual)+"%");    
+                    $('#Keep_Lose').css("width",(100-percentual)+"%");
                 }
             }
             else if(KeepChoice && Win == false){
@@ -231,9 +223,9 @@
                 }
                 else{
                     $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"%"+"</strong>");
-                    $('#Keep_Lose').css("width",percentual+"%");   
+                    $('#Keep_Lose').css("width",percentual+"%");
                     $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Keep_Win').css("width",(100-percentual)+"%");  
+                    $('#Keep_Win').css("width",(100-percentual)+"%");
                 }
             }
             else if(ChangeChoice && Win){
@@ -254,7 +246,7 @@
                     $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Win').css("width",percentual+"%");
                     $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Change_Lose').css("width",(100-percentual)+"%");    
+                    $('#Change_Lose').css("width",(100-percentual)+"%");
                 }
             }
             else if(ChangeChoice && Win == false){
@@ -272,7 +264,7 @@
                     $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Lose').css("width",percentual+"%");
                     $('#Change_Win').html("Goats: "+Cars_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Change_Win').css("width",(100-percentual)+"%"); 
+                    $('#Change_Win').css("width",(100-percentual)+"%");
                 }
             }
 
@@ -325,13 +317,13 @@
             $('#Keep_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
             $('#Keep_Win').css("width","50%");
             $('#Keep_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
-            $('#Keep_Lose').css("width","50%");   
+            $('#Keep_Lose').css("width","50%");
 
 
             $('#Change_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
             $('#Change_Win').css("width","50%");
             $('#Change_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
-            $('#Change_Lose').css("width","50%");  
+            $('#Change_Lose').css("width","50%");
 
         });
 
