@@ -50,19 +50,26 @@
     	                <b>Are you sure you want to open this door?</b>
     	            </p>
     	        </div>
+                <br>
+
+                <button id="reset" type="button" class="btn btn-warning" style="margin: 0 auto; width: 100%">RESET PLAY</button>
+
             </div>
 
-            <br>
 
-            <button id="reset" style="float: center;" type="button" class="btn btn-warning">RESET PLAY</button>
-            <button id="resetData" style="float: center;" type="button" class="btn btn-warning">RESET DATA</button>
 
             <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Autoplay</span>
+                </div>
                 <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
                 <div class="input-group-append">
                     <button class="btn btn-primary" id="goAutoplay" type="button">GO</button>
                 </div>
             </div>
+
+
+            <button id="resetData" type="button" class="btn btn-danger" style="width: 100%">RESET DATA</button>
 
             <button id="KeepChoice" style="float: left;" type="button" class="btn btn-success btn-lg">Keep Choice</button>
             <div style="margin-top: 50px;"></div>
@@ -132,6 +139,11 @@
 
             $(".door").off();//Rimuove tutti gli handlers
 
+            $('#reset').html('RESET PLAY');
+            $('#reset').removeClass('btn-success');
+            $('#reset').removeClass('btn-warning');
+            $('#reset').addClass('btn-warning');
+
             $(".door.unlocked").click(function(){
                 if ($(".door.pending").length == 0){ //Se è la prima volta che si sceglie la porta
                     console.log("Added class 'pending'");
@@ -153,6 +165,9 @@
                     $('#pendingDialog').hide();
 
                     $(this).addClass('open');
+                    $('#reset').removeClass('btn-warning');
+                    $('#reset').addClass('btn-success');
+                    $('#reset').html('PLAY AGAIN');
 
                     if($(this).attr('id') != pendingDoor){
                         KeepChoice = false;
