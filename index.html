@@ -24,35 +24,38 @@
 
 	    <div id="doorContainer">
 
-	    	<div class="behindDoor">
+            <div id="doorCont">   
+    	    	<div class="behindDoor">
 
-	    		<div id="leftDoor" class="door unlocked">
-	            	<img src="./media/door/0.png" hidden>
-	       		</div>
+    	    		<div id="leftDoor" class="door unlocked">
+    	            	<img src="./media/door/0.png" hidden>
+    	       		</div>
 
-	    	</div>
+    	    	</div>
+    	        
+    	    	<div class="behindDoor">
+    		        <div id="centralDoor" class="door unlocked">
+    		            <img src="./media/door/0.png" hidden>
+    		        </div>
+    		    </div>
 
-	    	<div class="behindDoor">
-		        <div id="centralDoor" class="door unlocked">
-		            <img src="./media/door/0.png" hidden>
-		        </div>
-		    </div>
+    		    <div class="behindDoor">
+    		        <div id="rightDoor" class="door unlocked">
+    		            <img src="./media/door/0.png" hidden>
+    		        </div>
+    		   	</div>
 
-		    <div class="behindDoor">
-		        <div id="rightDoor" class="door unlocked">
-		            <img src="./media/door/0.png" hidden>
-		        </div>
-		   	</div>
+    	        <div id="pendingDialog" style="vertical-align: middle;">
+    	            <p  style="color: red">
+    	                <b>Are you sure you want to open this door?</b>
+    	            </p>
+    	        </div>
+            </div>
 
-	        <div id="pendingDialog" style="vertical-align: middle;">
-	            <p  style="color: red">
-	                <b>Are you sure you want to open this door?</b>
-	            </p>
-	        </div>
             <br>
 
-            <button id="reset" style="float: right;" type="button" class="btn btn-warning">RESET PLAY</button>
-            <button id="resetData" style="float: right;" type="button" class="btn btn-warning">RESET DATA</button>
+            <button id="reset" style="float: center;" type="button" class="btn btn-warning">RESET PLAY</button>
+            <button id="resetData" style="float: center;" type="button" class="btn btn-warning">RESET DATA</button>
 
             <div class="input-group">
                 <input type="number" id="autoplayInput" class="form-control"  min="1" value="1">
@@ -81,7 +84,7 @@
                 <div class="alert alert-success monty__indicator align" style="width: 50%;" id="Change_Win">Cars: 0 | <strong>50%</strong></div>
                 <div class="alert alert- btn-danger monty__indicator align" style="width: 50%;" id="Change_Lose">Goats: 0 | <strong>50%</strong></div>
             </div>
-
+            
 	    </div>
 
 
@@ -154,7 +157,7 @@
                     if($(this).attr('id') != pendingDoor){
                         KeepChoice = false;
                     }
-                    else{ //added else so that variable is not based on reset
+                    else{ //added else so that variable is not based on reset 
                         KeepChoice = true;
                     }
 
@@ -162,7 +165,7 @@
 
 
                     switch(Math.round(Math.random())){
-                    	case 0:
+                    	case 0: 
                     		$(this).parent().css('background-image', 'url("./media/c.png")');
                             Win = false;
                             ChangeGraphic();
@@ -196,7 +199,7 @@
                     $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Keep_Win').css("width",percentual+"%");
                     $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Keep_Lose').css("width",(100-percentual)+"%");
+                    $('#Keep_Lose').css("width",(100-percentual)+"%");    
                 }
             }
             else if(KeepChoice && Win == false){
@@ -213,9 +216,9 @@
                 }
                 else{
                     $('#Keep_Lose').html("Goats: "+Goats_Keep +" | <strong>"+percentual+"%"+"</strong>");
-                    $('#Keep_Lose').css("width",percentual+"%");
+                    $('#Keep_Lose').css("width",percentual+"%");   
                     $('#Keep_Win').html("Cars: "+Cars_Keep +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Keep_Win').css("width",(100-percentual)+"%");
+                    $('#Keep_Win').css("width",(100-percentual)+"%");  
                 }
             }
             else if(ChangeChoice && Win){
@@ -236,7 +239,7 @@
                     $('#Change_Win').html("Cars: "+Cars_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Win').css("width",percentual+"%");
                     $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Change_Lose').css("width",(100-percentual)+"%");
+                    $('#Change_Lose').css("width",(100-percentual)+"%");    
                 }
             }
             else if(ChangeChoice && Win == false){
@@ -254,7 +257,7 @@
                     $('#Change_Lose').html("Goats: "+Goats_Change +" | <strong>"+percentual+"%"+"</strong>");
                     $('#Change_Lose').css("width",percentual+"%");
                     $('#Change_Win').html("Goats: "+Cars_Change +" | <strong>"+(100-percentual)+"%"+"</strong>");
-                    $('#Change_Win').css("width",(100-percentual)+"%");
+                    $('#Change_Win').css("width",(100-percentual)+"%"); 
                 }
             }
 
@@ -307,13 +310,13 @@
             $('#Keep_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
             $('#Keep_Win').css("width","50%");
             $('#Keep_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
-            $('#Keep_Lose').css("width","50%");
+            $('#Keep_Lose').css("width","50%");   
 
 
             $('#Change_Win').html("Cars: 0" +" | <strong>"+"50%"+"</strong>");
             $('#Change_Win').css("width","50%");
             $('#Change_Lose').html("Goats: 0" +" | <strong>"+"50%"+"</strong>");
-            $('#Change_Lose').css("width","50%");
+            $('#Change_Lose').css("width","50%");  
 
         });
 
