@@ -228,7 +228,7 @@
                     $('#Keep_Win').css("width",(100-percentual)+"%");
                 }
             }
-            else if(ChangeChoice && Win){
+            else if(KeepChoice== false && Win){
 
                 Change++;
                 Win_Change++;
@@ -249,7 +249,7 @@
                     $('#Change_Lose').css("width",(100-percentual)+"%");
                 }
             }
-            else if(ChangeChoice && Win == false){
+            else if(KeepChoice == false  && Win == false){
 
                 Change++;
                 Lose_Change++;
